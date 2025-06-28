@@ -1545,7 +1545,14 @@ type User_PasswordBcrypt struct {
 func (*User_PasswordBcrypt) isUser_Password() {}
 
 type UiSetting struct {
+<<<<<<< HEAD
 	state         protoimpl.MessageState
+=======
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UseCompactUi  bool                   `protobuf:"varint,1,opt,name=useCompactUi,proto3" json:"useCompactUi,omitempty"`
+	Tokens        string                 `protobuf:"bytes,2,opt,name=tokens,proto3" json:"tokens,omitempty"`
+	unknownFields protoimpl.UnknownFields
+>>>>>>> ac0049f (feat: add ui "tokens" setting)
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
@@ -1587,6 +1594,13 @@ func (x *UiSetting) GetUseCompactUi() bool {
 		return x.UseCompactUi
 	}
 	return false
+}
+
+func (x *UiSetting) GetTokens() string {
+	if x != nil {
+		return x.Tokens
+	}
+	return ""
 }
 
 type HubConfig_InstanceInfo struct {
@@ -2194,6 +2208,7 @@ func (x *Hook_Healthchecks) GetTemplate() string {
 
 var File_v1_config_proto protoreflect.FileDescriptor
 
+<<<<<<< HEAD
 var file_v1_config_proto_rawDesc = []byte{
 	0x0a, 0x0f, 0x76, 0x31, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x12, 0x02, 0x76, 0x31, 0x1a, 0x1b, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72,
@@ -2506,6 +2521,193 @@ var file_v1_config_proto_rawDesc = []byte{
 	0x72, 0x67, 0x65, 0x2f, 0x62, 0x61, 0x63, 0x6b, 0x72, 0x65, 0x73, 0x74, 0x2f, 0x67, 0x65, 0x6e,
 	0x2f, 0x67, 0x6f, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
+=======
+const file_v1_config_proto_rawDesc = "" +
+	"\n" +
+	"\x0fv1/config.proto\x12\x02v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x0fv1/crypto.proto\"}\n" +
+	"\tHubConfig\x128\n" +
+	"\tinstances\x18\x01 \x03(\v2\x1a.v1.HubConfig.InstanceInfoR\tinstances\x1a6\n" +
+	"\fInstanceInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06secret\x18\x02 \x01(\tR\x06secret\"\xf9\x01\n" +
+	"\x06Config\x12\x14\n" +
+	"\x05modno\x18\x01 \x01(\x05R\x05modno\x12\x18\n" +
+	"\aversion\x18\x06 \x01(\x05R\aversion\x12\x1a\n" +
+	"\binstance\x18\x02 \x01(\tR\binstance\x12\x1e\n" +
+	"\x05repos\x18\x03 \x03(\v2\b.v1.RepoR\x05repos\x12\x1e\n" +
+	"\x05plans\x18\x04 \x03(\v2\b.v1.PlanR\x05plans\x12\x1c\n" +
+	"\x04auth\x18\x05 \x01(\v2\b.v1.AuthR\x04auth\x12&\n" +
+	"\tmultihost\x18\a \x01(\v2\r.v1.MultihostR\x04sync\x12\x1d\n" +
+	"\x02ui\x18\b \x01(\v2\r.v1.UiSettingR\x02ui\"\xae\x02\n" +
+	"\tMultihost\x123\n" +
+	"\vknown_hosts\x18\x01 \x03(\v2\x12.v1.Multihost.PeerR\n" +
+	"knownHosts\x12A\n" +
+	"\x12authorized_clients\x18\x02 \x03(\v2\x12.v1.Multihost.PeerR\x11authorizedClients\x1a\xa8\x01\n" +
+	"\x04Peer\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x12,\n" +
+	"\n" +
+	"public_key\x18\x03 \x01(\v2\r.v1.PublicKeyR\tpublicKey\x12.\n" +
+	"\x13public_key_verified\x18\x04 \x01(\bR\x11publicKeyVerified\x12!\n" +
+	"\finstance_url\x18\x02 \x01(\tR\vinstanceUrl\"\xbd\x03\n" +
+	"\x04Repo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
+	"\x03uri\x18\x02 \x01(\tR\x03uri\x12\x12\n" +
+	"\x04guid\x18\v \x01(\tR\x04guid\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x10\n" +
+	"\x03env\x18\x04 \x03(\tR\x03env\x12\x14\n" +
+	"\x05flags\x18\x05 \x03(\tR\x05flags\x122\n" +
+	"\fprune_policy\x18\x06 \x01(\v2\x0f.v1.PrunePolicyR\vprunePolicy\x122\n" +
+	"\fcheck_policy\x18\t \x01(\v2\x0f.v1.CheckPolicyR\vcheckPolicy\x12\x1e\n" +
+	"\x05hooks\x18\a \x03(\v2\b.v1.HookR\x05hooks\x12\x1f\n" +
+	"\vauto_unlock\x18\b \x01(\bR\n" +
+	"autoUnlock\x12'\n" +
+	"\x0fauto_initialize\x18\f \x01(\bR\x0eautoInitialize\x128\n" +
+	"\x0ecommand_prefix\x18\n" +
+	" \x01(\v2\x11.v1.CommandPrefixR\rcommandPrefix\x12/\n" +
+	"\x19allowed_peer_instance_ids\x18d \x03(\tR\fallowedPeers\"\xd9\x02\n" +
+	"\x04Plan\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04repo\x18\x02 \x01(\tR\x04repo\x12\x14\n" +
+	"\x05paths\x18\x04 \x03(\tR\x05paths\x12\x1a\n" +
+	"\bexcludes\x18\x05 \x03(\tR\bexcludes\x12\x1c\n" +
+	"\tiexcludes\x18\t \x03(\tR\tiexcludes\x12(\n" +
+	"\bschedule\x18\f \x01(\v2\f.v1.ScheduleR\bschedule\x121\n" +
+	"\tretention\x18\a \x01(\v2\x13.v1.RetentionPolicyR\tretention\x12\x1e\n" +
+	"\x05hooks\x18\b \x03(\v2\b.v1.HookR\x05hooks\x12\"\n" +
+	"\fbackup_flags\x18\n" +
+	" \x03(\tR\fbackup_flags\x12*\n" +
+	"\x11skip_if_unchanged\x18\r \x01(\bR\x0fskipIfUnchangedJ\x04\b\x03\x10\x04J\x04\b\x06\x10\aJ\x04\b\v\x10\f\"\x9b\x02\n" +
+	"\rCommandPrefix\x126\n" +
+	"\aio_nice\x18\x01 \x01(\x0e2\x1d.v1.CommandPrefix.IONiceLevelR\x06ioNice\x129\n" +
+	"\bcpu_nice\x18\x02 \x01(\x0e2\x1e.v1.CommandPrefix.CPUNiceLevelR\acpuNice\"[\n" +
+	"\vIONiceLevel\x12\x0e\n" +
+	"\n" +
+	"IO_DEFAULT\x10\x00\x12\x16\n" +
+	"\x12IO_BEST_EFFORT_LOW\x10\x01\x12\x17\n" +
+	"\x13IO_BEST_EFFORT_HIGH\x10\x02\x12\v\n" +
+	"\aIO_IDLE\x10\x03\":\n" +
+	"\fCPUNiceLevel\x12\x0f\n" +
+	"\vCPU_DEFAULT\x10\x00\x12\f\n" +
+	"\bCPU_HIGH\x10\x01\x12\v\n" +
+	"\aCPU_LOW\x10\x02\"\xff\x02\n" +
+	"\x0fRetentionPolicy\x12-\n" +
+	"\x12policy_keep_last_n\x18\n" +
+	" \x01(\x05H\x00R\x0fpolicyKeepLastN\x12Z\n" +
+	"\x14policy_time_bucketed\x18\v \x01(\v2&.v1.RetentionPolicy.TimeBucketedCountsH\x00R\x12policyTimeBucketed\x12(\n" +
+	"\x0fpolicy_keep_all\x18\f \x01(\bH\x00R\rpolicyKeepAll\x1a\xac\x01\n" +
+	"\x12TimeBucketedCounts\x12\x16\n" +
+	"\x06hourly\x18\x01 \x01(\x05R\x06hourly\x12\x14\n" +
+	"\x05daily\x18\x02 \x01(\x05R\x05daily\x12\x16\n" +
+	"\x06weekly\x18\x03 \x01(\x05R\x06weekly\x12\x18\n" +
+	"\amonthly\x18\x04 \x01(\x05R\amonthly\x12\x16\n" +
+	"\x06yearly\x18\x05 \x01(\x05R\x06yearly\x12\x1e\n" +
+	"\vkeep_last_n\x18\x06 \x01(\x05R\tkeepLastNB\b\n" +
+	"\x06policy\"\x8f\x01\n" +
+	"\vPrunePolicy\x12(\n" +
+	"\bschedule\x18\x02 \x01(\v2\f.v1.ScheduleR\bschedule\x12(\n" +
+	"\x10max_unused_bytes\x18\x03 \x01(\x03R\x0emaxUnusedBytes\x12,\n" +
+	"\x12max_unused_percent\x18\x04 \x01(\x01R\x10maxUnusedPercent\"\xa3\x01\n" +
+	"\vCheckPolicy\x12(\n" +
+	"\bschedule\x18\x01 \x01(\v2\f.v1.ScheduleR\bschedule\x12'\n" +
+	"\x0estructure_only\x18d \x01(\bH\x00R\rstructureOnly\x129\n" +
+	"\x18read_data_subset_percent\x18e \x01(\x01H\x00R\x15readDataSubsetPercentB\x06\n" +
+	"\x04mode\"\xa7\x02\n" +
+	"\bSchedule\x12\x1c\n" +
+	"\bdisabled\x18\x01 \x01(\bH\x00R\bdisabled\x12\x14\n" +
+	"\x04cron\x18\x02 \x01(\tH\x00R\x04cron\x12,\n" +
+	"\x10maxFrequencyDays\x18\x03 \x01(\x05H\x00R\x10maxFrequencyDays\x12.\n" +
+	"\x11maxFrequencyHours\x18\x04 \x01(\x05H\x00R\x11maxFrequencyHours\x12(\n" +
+	"\x05clock\x18\x05 \x01(\x0e2\x12.v1.Schedule.ClockR\x05clock\"S\n" +
+	"\x05Clock\x12\x11\n" +
+	"\rCLOCK_DEFAULT\x10\x00\x12\x0f\n" +
+	"\vCLOCK_LOCAL\x10\x01\x12\r\n" +
+	"\tCLOCK_UTC\x10\x02\x12\x17\n" +
+	"\x13CLOCK_LAST_RUN_TIME\x10\x03B\n" +
+	"\n" +
+	"\bschedule\"\xc5\x0e\n" +
+	"\x04Hook\x122\n" +
+	"\n" +
+	"conditions\x18\x01 \x03(\x0e2\x12.v1.Hook.ConditionR\n" +
+	"conditions\x12+\n" +
+	"\bon_error\x18\x02 \x01(\x0e2\x10.v1.Hook.OnErrorR\aonError\x129\n" +
+	"\x0eaction_command\x18d \x01(\v2\x10.v1.Hook.CommandH\x00R\ractionCommand\x129\n" +
+	"\x0eaction_webhook\x18e \x01(\v2\x10.v1.Hook.WebhookH\x00R\ractionWebhook\x129\n" +
+	"\x0eaction_discord\x18f \x01(\v2\x10.v1.Hook.DiscordH\x00R\ractionDiscord\x126\n" +
+	"\raction_gotify\x18g \x01(\v2\x0f.v1.Hook.GotifyH\x00R\factionGotify\x123\n" +
+	"\faction_slack\x18h \x01(\v2\x0e.v1.Hook.SlackH\x00R\vactionSlack\x12<\n" +
+	"\x0faction_shoutrrr\x18i \x01(\v2\x11.v1.Hook.ShoutrrrH\x00R\x0eactionShoutrrr\x12H\n" +
+	"\x13action_healthchecks\x18j \x01(\v2\x15.v1.Hook.HealthchecksH\x00R\x12actionHealthchecks\x1a#\n" +
+	"\aCommand\x12\x18\n" +
+	"\acommand\x18\x01 \x01(\tR\acommand\x1a\xa1\x01\n" +
+	"\aWebhook\x12\x1f\n" +
+	"\vwebhook_url\x18\x01 \x01(\tR\n" +
+	"webhookUrl\x12/\n" +
+	"\x06method\x18\x02 \x01(\x0e2\x17.v1.Hook.Webhook.MethodR\x06method\x12\x1a\n" +
+	"\btemplate\x18d \x01(\tR\btemplate\"(\n" +
+	"\x06Method\x12\v\n" +
+	"\aUNKNOWN\x10\x00\x12\a\n" +
+	"\x03GET\x10\x01\x12\b\n" +
+	"\x04POST\x10\x02\x1aF\n" +
+	"\aDiscord\x12\x1f\n" +
+	"\vwebhook_url\x18\x01 \x01(\tR\n" +
+	"webhookUrl\x12\x1a\n" +
+	"\btemplate\x18\x02 \x01(\tR\btemplate\x1a\x98\x01\n" +
+	"\x06Gotify\x12\x19\n" +
+	"\bbase_url\x18\x01 \x01(\tR\abaseUrl\x12\x14\n" +
+	"\x05token\x18\x03 \x01(\tR\x05token\x12\x1a\n" +
+	"\btemplate\x18d \x01(\tR\btemplate\x12%\n" +
+	"\x0etitle_template\x18e \x01(\tR\rtitleTemplate\x12\x1a\n" +
+	"\bpriority\x18f \x01(\x05R\bpriority\x1aD\n" +
+	"\x05Slack\x12\x1f\n" +
+	"\vwebhook_url\x18\x01 \x01(\tR\n" +
+	"webhookUrl\x12\x1a\n" +
+	"\btemplate\x18\x02 \x01(\tR\btemplate\x1aI\n" +
+	"\bShoutrrr\x12!\n" +
+	"\fshoutrrr_url\x18\x01 \x01(\tR\vshoutrrrUrl\x12\x1a\n" +
+	"\btemplate\x18\x02 \x01(\tR\btemplate\x1aK\n" +
+	"\fHealthchecks\x12\x1f\n" +
+	"\vwebhook_url\x18\x01 \x01(\tR\n" +
+	"webhookUrl\x12\x1a\n" +
+	"\btemplate\x18\x02 \x01(\tR\btemplate\"\xf5\x03\n" +
+	"\tCondition\x12\x15\n" +
+	"\x11CONDITION_UNKNOWN\x10\x00\x12\x17\n" +
+	"\x13CONDITION_ANY_ERROR\x10\x01\x12\x1c\n" +
+	"\x18CONDITION_SNAPSHOT_START\x10\x02\x12\x1a\n" +
+	"\x16CONDITION_SNAPSHOT_END\x10\x03\x12\x1c\n" +
+	"\x18CONDITION_SNAPSHOT_ERROR\x10\x04\x12\x1e\n" +
+	"\x1aCONDITION_SNAPSHOT_WARNING\x10\x05\x12\x1e\n" +
+	"\x1aCONDITION_SNAPSHOT_SUCCESS\x10\x06\x12\x1e\n" +
+	"\x1aCONDITION_SNAPSHOT_SKIPPED\x10\a\x12\x19\n" +
+	"\x15CONDITION_PRUNE_START\x10d\x12\x19\n" +
+	"\x15CONDITION_PRUNE_ERROR\x10e\x12\x1b\n" +
+	"\x17CONDITION_PRUNE_SUCCESS\x10f\x12\x1a\n" +
+	"\x15CONDITION_CHECK_START\x10\xc8\x01\x12\x1a\n" +
+	"\x15CONDITION_CHECK_ERROR\x10\xc9\x01\x12\x1c\n" +
+	"\x17CONDITION_CHECK_SUCCESS\x10\xca\x01\x12\x1b\n" +
+	"\x16CONDITION_FORGET_START\x10\xac\x02\x12\x1b\n" +
+	"\x16CONDITION_FORGET_ERROR\x10\xad\x02\x12\x1d\n" +
+	"\x18CONDITION_FORGET_SUCCESS\x10\xae\x02\"\xa9\x01\n" +
+	"\aOnError\x12\x13\n" +
+	"\x0fON_ERROR_IGNORE\x10\x00\x12\x13\n" +
+	"\x0fON_ERROR_CANCEL\x10\x01\x12\x12\n" +
+	"\x0eON_ERROR_FATAL\x10\x02\x12\x1a\n" +
+	"\x16ON_ERROR_RETRY_1MINUTE\x10d\x12\x1c\n" +
+	"\x18ON_ERROR_RETRY_10MINUTES\x10e\x12&\n" +
+	"\"ON_ERROR_RETRY_EXPONENTIAL_BACKOFF\x10gB\b\n" +
+	"\x06action\"B\n" +
+	"\x04Auth\x12\x1a\n" +
+	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12\x1e\n" +
+	"\x05users\x18\x02 \x03(\v2\b.v1.UserR\x05users\"Q\n" +
+	"\x04User\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12)\n" +
+	"\x0fpassword_bcrypt\x18\x02 \x01(\tH\x00R\x0epasswordBcryptB\n" +
+	"\n" +
+	"\bpassword\"G\n" +
+	"\tUiSetting\x12\"\n" +
+	"\fuseCompactUi\x18\x01 \x01(\bR\fuseCompactUi\x12\x16\n" +
+	"\x06tokens\x18\x02 \x01(\tR\x06tokensB,Z*github.com/garethgeorge/backrest/gen/go/v1b\x06proto3"
+>>>>>>> ac0049f (feat: add ui "tokens" setting)
 
 var (
 	file_v1_config_proto_rawDescOnce sync.Once
