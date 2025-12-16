@@ -11,7 +11,7 @@ help:
 	@echo "Main targets:"
 	@echo "  all                - Build everything (default)"
 	@echo "  build              - Build the complete application (UI + Go backend)"
-	@echo "  run                - Run the application (builds if needed)"
+	@echo "  run                - Run the application (builds if needed, Unix/Linux/macOS only)"
 	@echo "  dev                - Start development servers (UI dev server)"
 	@echo ""
 	@echo "Component builds:"
@@ -20,7 +20,7 @@ help:
 	@echo "  build-ui-windows   - Build the web UI (Windows)"
 	@echo ""
 	@echo "Code generation:"
-	@echo "  generate-proto     - Generate protobuf files (requires buf and protoc tools)"
+	@echo "  generate-proto     - Generate protobuf files (requires buf/protoc, Unix/Linux/macOS)"
 	@echo ""
 	@echo "Dependencies:"
 	@echo "  install-deps       - Install all dependencies (Go + UI)"
@@ -48,7 +48,7 @@ install-deps-go:
 install-deps-ui:
 	cd webui && npm install
 
-# Generate protobuf files
+# Generate protobuf files (requires buf and protoc tools - Unix/Linux/macOS)
 generate-proto:
 	cd proto && ./update.sh
 
@@ -74,7 +74,7 @@ test: test-go
 test-go:
 	go test ./... -tags=sqlite3_dotlk
 
-# Run the application
+# Run the application (Unix/Linux/macOS)
 run: build
 	./cmd/backrest/backrest
 
