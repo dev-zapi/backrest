@@ -269,10 +269,27 @@ npm install -g @bufbuild/protoc-gen-es
 
 ## Compiling
 
+You can use the provided Makefile for a streamlined build process:
+
+```sh
+# Install dependencies and build everything
+make install-deps
+make build
+
+# Or simply
+make all
+```
+
+For manual builds:
+
 ```sh
 (cd webui && npm i && npm run build)
 (cd cmd/backrest && go build .)
 ```
+
+Run `make help` to see all available build targets.
+
+**Note**: Generated protobuf files (`gen/go/`, `webui/gen/ts/`) are not tracked in git. They are generated locally and required for builds. If you modify `.proto` files, run `make generate-proto`.
 
 ## Using VSCode Dev Containers
 
