@@ -283,7 +283,7 @@ make all
 For manual builds:
 
 ```sh
-(cd webui && npm i && npm run build)
+(cd webui && pnpm i && pnpm run build)
 (cd cmd/backrest && go build .)
 ```
 

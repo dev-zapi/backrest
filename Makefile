@@ -25,7 +25,7 @@ help:
 	@echo "Dependencies:"
 	@echo "  install-deps       - Install all dependencies (Go + UI)"
 	@echo "  install-deps-go    - Install Go dependencies"
-	@echo "  install-deps-ui    - Install UI dependencies (npm)"
+	@echo "  install-deps-ui    - Install UI dependencies (pnpm)"
 	@echo ""
 	@echo "Testing:"
 	@echo "  test               - Run all tests"
@@ -46,7 +46,7 @@ install-deps-go:
 
 # Install UI dependencies
 install-deps-ui:
-	cd webui && npm install
+	cd webui && pnpm install
 
 # Generate protobuf files (requires buf and protoc tools - Unix/Linux/macOS)
 generate-proto:
@@ -54,11 +54,11 @@ generate-proto:
 
 # Build web UI for Unix
 build-ui:
-	cd webui && npm run build
+	cd webui && pnpm run build
 
 # Build web UI for Windows
 build-ui-windows:
-	cd webui && npm run build-windows
+	cd webui && pnpm run build-windows
 
 # Build Go backend (requires UI build artifacts)
 build-go: build-ui
@@ -80,10 +80,10 @@ run: build
 
 # Start development mode (UI dev server)
 dev:
-	cd webui && npm run start
+	cd webui && pnpm run start
 
 # Clean build artifacts
 clean:
-	cd webui && npm run clean
+	cd webui && pnpm run clean
 	rm -f cmd/backrest/backrest
 	rm -f backrest
