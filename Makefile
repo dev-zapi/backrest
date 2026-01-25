@@ -20,7 +20,7 @@ help:
 	@echo "  build-ui-windows   - Build the web UI (Windows)"
 	@echo ""
 	@echo "Code generation:"
-	@echo "  generate-proto     - Generate protobuf files (requires buf/protoc, Unix/Linux/macOS)"
+	@echo "  generate-proto     - Generate protobuf files (requires buf/protoc tools)"
 	@echo ""
 	@echo "Dependencies:"
 	@echo "  install-deps       - Install all dependencies (Go + UI)"
@@ -48,9 +48,9 @@ install-deps-go:
 install-deps-ui:
 	cd webui && pnpm install
 
-# Generate protobuf files (requires buf and protoc tools - Unix/Linux/macOS)
+# Generate protobuf files (requires buf and protoc tools)
 generate-proto:
-	cd proto && ./update.sh
+	cd proto && buf generate
 
 # Build web UI for Unix
 build-ui:
