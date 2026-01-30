@@ -289,7 +289,7 @@ For manual builds:
 
 Run `make help` to see all available build targets.
 
-**Note**: Generated protobuf files (`gen/go/`, `webui/gen/ts/`) are not tracked in git. They are generated locally and required for builds. If you modify `.proto` files, run `make generate-proto`.
+**Note**: Generated protobuf files (`gen/go/`, `webui/gen/ts/`) are not tracked in git. They are generated locally and are required for builds. On a fresh clone, run `make generate-proto` once before your first build, and run it again whenever you modify `.proto` files.
 
 ## Using VSCode Dev Containers
 

@@ -35,7 +35,8 @@ help:
 	@echo "  clean              - Clean build artifacts"
 	@echo ""
 	@echo "Note: Generated protobuf files (gen/go/, webui/gen/ts/) are not tracked in git."
-	@echo "      Run 'make generate-proto' if you modify .proto files."
+	@echo "      They are automatically generated when running 'make build' or 'make all'."
+	@echo "      Run 'make generate-proto' manually if you only want to regenerate proto files."
 
 # Install all dependencies
 install-deps: install-deps-go install-deps-ui
@@ -60,12 +61,12 @@ build-ui:
 build-ui-windows:
 	cd webui && pnpm run build-windows
 
-# Build Go backend (requires UI build artifacts)
-build-go: build-ui
+# Build Go backend
+build-go:
 	cd cmd/backrest && go build -tags=sqlite3_dotlk .
 
 # Build everything
-build: build-ui build-go
+build: generate-proto build-ui build-go
 
 # Run tests
 test: test-go
