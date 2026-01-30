@@ -61,12 +61,12 @@ build-ui:
 build-ui-windows:
 	cd webui && pnpm run build-windows
 
-# Build Go backend
-build-go:
+# Build Go backend (requires UI build artifacts to embed)
+build-go: build-ui
 	cd cmd/backrest && go build -tags=sqlite3_dotlk .
 
 # Build everything
-build: generate-proto build-ui build-go
+build: generate-proto build-go
 
 # Run tests
 test: test-go
