@@ -44,8 +44,11 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install protoc-gen-es
-        run: npm install -g @bufbuild/protoc-gen-es
+        run: pnpm install -g @bufbuild/protoc-gen-es
 
       - name: Generate protobuf files
         run: cd proto && buf generate
@@ -86,8 +89,11 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install protoc-gen-es
-        run: npm install -g @bufbuild/protoc-gen-es
+        run: pnpm install -g @bufbuild/protoc-gen-es
 
       - name: Generate protobuf files
         run: cd proto && buf generate
