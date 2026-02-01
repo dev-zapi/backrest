@@ -1,0 +1,58 @@
+name: 'Setup Build Dependencies'
+description: 'Install dependencies and generate protobuf files for building backrest'
+
+inputs:
+  go-version:
+    description: 'Go version to use'
+    required: false
+    default: '1.24'
+  node-version:
+    description: 'Node.js version to use'
+    required: false
+    default: '20'
+  setup-pnpm:
+    description: 'Whether to setup pnpm'
+    required: false
+    default: 'false'
+  pnpm-version:
+    description: 'pnpm version to use when setup-pnpm is true'
+    required: false
+    default: '9'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ inputs.go-version }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Setup pnpm
+      if: ${{ inputs.setup-pnpm == 'true' }}
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm-version }}
+
+    - name: Install buf
+      shell: bash
+      run: go install github.com/bufbuild/buf/cmd/buf@latest
+
+    - name: Install protoc plugins
+      shell: bash
+      run: |
+        go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+        go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+        go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
+
+    - name: Install protoc-gen-es
+      shell: bash
+      run: npm install -g @bufbuild/protoc-gen-es
+
+    - name: Generate protobuf files
+      shell: bash
+      run: cd proto && buf generate

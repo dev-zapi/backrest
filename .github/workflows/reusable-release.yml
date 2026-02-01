@@ -26,35 +26,13 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
+      - name: Setup build dependencies
+        uses: ./.github/actions/setup-build-deps
         with:
           go-version: "1.24"
-
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
           node-version: "20"
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Install buf
-        run: go install github.com/bufbuild/buf/cmd/buf@latest
-
-      - name: Install protoc plugins
-        run: |
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-          go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
-
-      - name: Install protoc-gen-es
-        run: npm install -g @bufbuild/protoc-gen-es
-
-      - name: Generate protobuf files
-        run: cd proto && buf generate
+          setup-pnpm: "true"
+          pnpm-version: "9"
 
       - name: Login to Docker Hub
         if: ${{ !inputs.snapshot }}
