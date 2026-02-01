@@ -22,10 +22,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
+      - name: Setup build dependencies
+        uses: ./.github/actions/setup-build-deps
         with:
           go-version: "1.24"
+          node-version: "20"
 
       - name: Install gotestsum
         run: go install gotest.tools/gotestsum@latest
@@ -37,20 +38,21 @@ jobs:
           gzip -c /dev/null > webui/dist/index.html.gz
 
       - name: Build
-        run: go build ./...
+        run: go build -tags=sqlite3_dotlk ./...
 
       - name: Test
-        run: PATH=$(pwd):$PATH gotestsum ./... -- --race
+        run: PATH=$(pwd):$PATH gotestsum ./... -- --race -tags=sqlite3_dotlk
 
   test-win:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
+      - name: Setup build dependencies
+        uses: ./.github/actions/setup-build-deps
         with:
           go-version: "1.24"
+          node-version: "20"
 
       - name: Create Fake WebUI Sources
         run: |

@@ -7,3 +7,5 @@ cmd/backrest/backrest
 .idea/
 .pnpm-store/
 webui/dist-backup/
+gen/go/
+webui/gen/ts/
