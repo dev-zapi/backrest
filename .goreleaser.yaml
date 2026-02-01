@@ -10,6 +10,8 @@ version: 1
 
 env:
   - BACKREST_BUILD_VERSION={{.Version}}
+  - GITHUB_OWNER={{ if index .Env "GITHUB_REPOSITORY_OWNER" }}{{ .Env.GITHUB_REPOSITORY_OWNER }}{{ else }}garethgeorge{{ end }}
+  - PROJECT_NAME={{ if index .Env "PROJECT_NAME" }}{{ .Env.PROJECT_NAME }}{{ else }}backrest{{ end }}
 
 before:
   hooks:
@@ -77,8 +79,8 @@ archives:
 
 dockers:
   - image_templates:
-      - garethgeorge/backrest:{{ .Tag }}-alpine-amd64
-      - ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-amd64
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
     dockerfile: Dockerfile.alpine
     use: buildx
     build_flag_templates:
@@ -88,8 +90,8 @@ dockers:
       - ./
 
   - image_templates:
-      - garethgeorge/backrest:{{ .Tag }}-alpine-arm64
-      - ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-arm64
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
     dockerfile: Dockerfile.alpine
     goarch: arm64
     use: buildx
@@ -100,8 +102,8 @@ dockers:
       - ./
 
   - image_templates:
-      - garethgeorge/backrest:{{ .Tag }}-scratch-arm64
-      - ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-arm64
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
     dockerfile: Dockerfile.scratch
     goarch: arm64
     use: buildx
@@ -112,8 +114,8 @@ dockers:
       - ./
 
   - image_templates:
-      - garethgeorge/backrest:{{ .Tag }}-scratch-amd64
-      - ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-amd64
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
     dockerfile: Dockerfile.scratch
     use: buildx
     build_flag_templates:
@@ -123,8 +125,8 @@ dockers:
       - ./
 
   - image_templates:
-      - garethgeorge/backrest:{{ .Tag }}-scratch-armv6
-      - ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-armv6
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
     dockerfile: Dockerfile.scratch
     use: buildx
     goarch: arm
@@ -136,100 +138,100 @@ dockers:
       - ./
 
 docker_manifests:
-  - name_template: "garethgeorge/backrest:latest"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:latest"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "ghcr.io/garethgeorge/backrest:latest"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:latest"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "garethgeorge/backrest:v{{ .Major }}"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:v{{ .Major }}"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "ghcr.io/garethgeorge/backrest:v{{ .Major }}"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:v{{ .Major }}"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "garethgeorge/backrest:v{{ .Major }}.{{ .Minor }}"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:v{{ .Major }}.{{ .Minor }}"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "ghcr.io/garethgeorge/backrest:v{{ .Major }}.{{ .Minor }}"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:v{{ .Major }}.{{ .Minor }}"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "garethgeorge/backrest:{{ .Tag }}"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "ghcr.io/garethgeorge/backrest:{{ .Tag }}"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "garethgeorge/backrest:latest-alpine"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:latest-alpine"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "ghcr.io/garethgeorge/backrest:latest-alpine"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:latest-alpine"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-alpine-arm64"
-  - name_template: "garethgeorge/backrest:scratch"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-alpine-arm64"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:scratch"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-arm64"
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-armv6"
-  - name_template: "ghcr.io/garethgeorge/backrest:scratch"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:scratch"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-arm64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-armv6"
-  - name_template: "garethgeorge/backrest:v{{ .Major }}-scratch"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:v{{ .Major }}-scratch"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-arm64"
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-armv6"
-  - name_template: "ghcr.io/garethgeorge/backrest:v{{ .Major }}-scratch"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:v{{ .Major }}-scratch"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-arm64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-armv6"
-  - name_template: "garethgeorge/backrest:v{{ .Major }}.{{ .Minor }}-scratch"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:v{{ .Major }}.{{ .Minor }}-scratch"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-arm64"
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-armv6"
-  - name_template: "ghcr.io/garethgeorge/backrest:v{{ .Major }}.{{ .Minor }}-scratch"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:v{{ .Major }}.{{ .Minor }}-scratch"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-arm64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-armv6"
-  - name_template: "garethgeorge/backrest:{{ .Tag }}-scratch"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
+  - name_template: "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch"
     image_templates:
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-amd64"
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-arm64"
-      - "garethgeorge/backrest:{{ .Tag }}-scratch-armv6"
-  - name_template: "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
+  - name_template: "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch"
     image_templates:
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-amd64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-arm64"
-      - "ghcr.io/garethgeorge/backrest:{{ .Tag }}-scratch-armv6"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-amd64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-arm64"
+      - "ghcr.io/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}:{{ .Tag }}-scratch-armv6"
 
 brews:
-  - name: backrest
-    homepage: https://github.com/garethgeorge/backrest
+  - name: "{{ .Env.PROJECT_NAME }}"
+    homepage: "https://github.com/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}"
     description: "Backrest is a web UI and orchestrator for restic backup."
 
-    url_template: "https://github.com/garethgeorge/backrest/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    url_template: "https://github.com/{{ .Env.GITHUB_OWNER }}/{{ .Env.PROJECT_NAME }}/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
 
     commit_author:
       name: goreleaserbot
       email: bot@goreleaser.com
 
     repository:
-      owner: garethgeorge
+      owner: "{{ .Env.GITHUB_OWNER }}"
       name: homebrew-backrest-tap
       branch: main
       token: "{{ .Env.HOMEBREW_GITHUB_TOKEN }}"
@@ -248,5 +250,5 @@ changelog:
 
 release:
   github:
-    owner: garethgeorge
-    name: backrest
+    owner: "{{ .Env.GITHUB_OWNER }}"
+    name: "{{ .Env.PROJECT_NAME }}"
